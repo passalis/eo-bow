@@ -32,7 +32,7 @@ def run_bow(seed=1):
     print "mAP = ", database.evaluate(Stest, test_labels)
 
     print "Learning EO-BoW representation..."
-    bow.fit(train_features, iters=30)
+    bow.fit(train_features, iters=50)
 
     print "Encoding objects..."
     Strain = bow.transform(train_features)
@@ -44,5 +44,5 @@ def run_bow(seed=1):
 
 
 if __name__ == '__main__':
-    # extract_features_15scene()
+    extract_features_15scene()
     run_bow()

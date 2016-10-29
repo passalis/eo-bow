@@ -145,6 +145,5 @@ class Entropy_BoW(SoftBoW):
         """
         for iter in tqdm(range(iters)):
             subsampled_data = subsample(data, self.n_feature_samples)
-            print subsampled_data.shape
             cur_loss = self.train_theano(subsampled_data)[0]
             print "Loss at iteration ", iter, " = ", cur_loss
