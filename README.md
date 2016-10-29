@@ -18,4 +18,4 @@ pages={1664-1677}
 </pre>
 
 
-To run this code you should download the [15-scene dataset](http://www-cvr.ai.uiuc.edu/ponce_grp/data) and set its path in the code.
+To run this code, download the [15-scene dataset](http://www-cvr.ai.uiuc.edu/ponce_grp/data) and set its path in the code.
