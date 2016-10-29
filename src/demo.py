@@ -3,6 +3,7 @@ from utils.datasets import load_features_15scene, extract_features_15scene, get_
 from method.bow import Entropy_BoW
 from utils.database_evaluation import Database
 
+
 def run_bow(seed=1):
     np.random.seed(1)
 
@@ -18,28 +19,30 @@ def run_bow(seed=1):
     test_features = features[test_idx]
     test_labels = labels[test_idx]
 
-    bow = Entropy_BoW(n_codewords=64, labels=train_labels, feature_dimension=128)
+    bow = Entropy_BoW(n_codewords=16, labels=train_labels, feature_dimension=128, g=0.01)
 
     print "Learning initial dictionary..."
     bow.initialize(train_features)
     print "Encoding objects..."
-    Strain = bow.encode_objects(train_features)
-    Stest = bow.encode_objects(test_features)
+    Strain = bow.transform(train_features)
+    Stest = bow.transform(test_features)
 
-    print "Evaluating representation..."
+    print "Evaluating initial representation..."
     database = Database(Strain, train_labels)
     print "mAP = ", database.evaluate(Stest, test_labels)
 
-    bow.train(train_features, iters=30)
+    print "Learning EO-BoW representation..."
+    bow.fit(train_features, iters=30)
 
     print "Encoding objects..."
-    Strain = bow.encode_objects(train_features)
-    Stest = bow.encode_objects(test_features)
+    Strain = bow.transform(train_features)
+    Stest = bow.transform(test_features)
 
     print "Evaluating optimized representation..."
     database = Database(Strain, train_labels)
     print "mAP = ", database.evaluate(Stest, test_labels)
 
+
 if __name__ == '__main__':
-    extract_features_15scene()
+    # extract_features_15scene()
     run_bow()

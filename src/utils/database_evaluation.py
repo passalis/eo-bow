@@ -1,10 +1,8 @@
 from sklearn.neighbors import NearestNeighbors
 import numpy as np
-import cPickle
-from sklearn.metrics.pairwise import additive_chi2_kernel
+
 
 class Database(object):
-
     def __init__(self, database_vectors, targets):
         """
         Creates a database object that contains the database_vectors and their labels

@@ -6,12 +6,13 @@ from utils.dsift import DsiftExtractor
 from scipy import misc
 import cPickle as pickle
 
+
 def extract_features_15scene():
     """
     Extracts dense SIFT features from the 15-scene dataset and stores it as a pickled file
     :return:
     """
-    #16
+    # 16
     sift_extractor = DsiftExtractor(8, 16)
 
     files, labels, categories = load_15_scene_dataset(path='/home/nick/local/datasets/15_scene/scene_categories')
@@ -26,9 +27,6 @@ def extract_features_15scene():
         pickle.dump(descriptors, f)
         pickle.dump(labels, f)
 
-    print len(files), len(labels)
-    print labels
-    print categories
 
 def load_features_15scene():
     with open("dataset.pickle", "rb") as f:
@@ -52,7 +50,7 @@ def load_15_scene_dataset(path='/home/nick/local/datasets/15_scene/scene_categor
     for i, cat in enumerate(categories):
         c_files = [join(join(path, cat), f) for f in listdir(join(path, cat))]
         files.extend(c_files)
-        labels.extend([ i for x in c_files])
+        labels.extend([i for x in c_files])
 
     labels = np.asarray(labels)
     return files, labels, categories
